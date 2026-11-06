@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title"> AIU - GEO217</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        skyDark: '#10202B',     
+                        skyMid: '#1F363D',      
+                        sandMain: '#D6B287',    
+                        sandDark: '#C29E75',    
+                        textDark: '#311D12',    
+                        textLight: '#F4EFEA',   
+                        aiuRed: '#E32636',
+                        aiuBlue: '#1A2E7D',
+                        aiuBg: '#111412'
+                    },
+                    fontFamily: {
+                        arabic: ['Tajawal', 'sans-serif'],
+                        english: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(180deg, #10202B 0%, #1F363D 20%, #D6B287 45%, #C29E75 100%);
+            color: #311D12;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        [dir="ltr"] body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Dynamic Star & Dust Orbs */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            animation: floatOrb 15s infinite alternate ease-in-out;
+        }
+        .orb-star { top: 5%; right: 15%; width: 300px; height: 300px; background-color: rgba(244, 239, 234, 0.15); }
+        .orb-dust { top: 40%; left: -5%; width: 500px; height: 500px; background-color: rgba(255, 255, 255, 0.2); animation-delay: 5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -40px) scale(1.1); }
+            100% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        /* Sand Glassmorphism Cards */
+        .sand-card {
+            background: rgba(244, 239, 234, 0.45);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(49, 29, 18, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sand-card:hover {
+            border-color: rgba(49, 29, 18, 0.5);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        input[type=range] {
+            accent-color: #311D12;
+        }
+
+        /* Styling for range track */
+        input[type=range]::-webkit-slider-runnable-track {
+            background: rgba(49, 29, 18, 0.2);
+            height: 8px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="relative selection:bg-textDark selection:text-sandMain">
+
+    <!-- Ambient Background Elements -->
+    <div class="bg-orb orb-star"></div>
+    <div class="bg-orb orb-dust"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="relative z-50 container mx-auto px-6 py-6 flex justify-between items-center border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-textLight font-black text-2xl border border-white/20">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <span class="text-xl font-black tracking-wide text-textLight" data-i18n="nav_title">التنمية المستدامة</span>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button onclick="toggleLanguage()" id="lang-btn" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white hover:text-skyDark transition-all border border-white/20 text-textLight text-sm font-bold flex items-center gap-2 backdrop-blur-md">
+                <i class="fa-solid fa-globe"></i>
+                <span id="lang-text">English</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Night Sky to Sand) -->
+    <header class="relative z-10 container mx-auto px-6 pt-24 pb-20 text-center max-w-5xl">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 text-textLight text-sm font-bold mb-8 backdrop-blur-sm shadow-xl">
+            <i class="fa-solid fa-earth-africa"></i> <span data-i18n="badge_text">الهدف التاسع للتنمية المستدامة (SDG 9)</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight text-textLight drop-shadow-lg" data-i18n="hero_title">
+            بناء بنية تحتية مرنة<br>لغدٍ مستدام
+        </h1>
+        <p class="text-lg md:text-xl text-textLight/80 mb-16 max-w-3xl mx-auto leading-relaxed" data-i18n="hero_desc">
+            رؤية هندسية بيئية لمعالجة التحديات المناخية من خلال الابتكار، التصنيع الأخضر، وتطوير البنية التحتية لمواكبة التغيرات العالمية.
+        </p>
+    </header>
+
+    <!-- Interactive Simulator (Sand Area) -->
+    <section class="relative z-10 container mx-auto px-6 py-4 max-w-6xl">
+        <div class="sand-card p-8 md:p-12 rounded-[2.5rem]">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black text-textDark mb-3" data-i18n="sim_title">محاكي الاستدامة التفاعلي</h2>
+                <p class="text-textDark/70 text-base font-medium" data-i18n="sim_sub">قم بتعديل المؤشرات لترى التأثير المباشر للحلول الهندسية المستدامة:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Slider 1 -->
+                <div class="bg-white/30 p-6 rounded-3xl border border-white/50">
+                    <label class="block text-sm font-bold mb-4 text-textDark" data-i18n="slider1_label">الاستثمار في البنية التحتية المرنة</label>
+                    <input type="range" id="infraSlider" min="10" max="100" value="70" class="w-full appearance-none cursor-pointer mb-4" oninput="updateSimulation()">
+                    <div class="flex justify-between text-xs text-textDark font-black">
+                        <span data-i18n="min_val">منخفض</span>
+                        <span id="infraVal" class="text-lg">70%</span>
+                        <span data-i18n="max_val">مرتفع</span>
+                    </div>
+                </div>
+                <!-- Slider 2 -->
+                <div class="bg-white/30 p-6 rounded-3xl border border-white/50">
+                    <label class="block text-sm font-bold mb-4 text-textDark" data-i18n="slider2_label">التحول للصناعات النظيفة والمستدامة</label>
+                    <input type="range" id="factorySlider" min="10" max="100" value="60" class="w-full appearance-none cursor-pointer mb-4" oninput="updateSimulation()">
+                    <div class="flex justify-between text-xs text-textDark font-black">
+                        <span data-i18n="min_val">منخفض</span>
+                        <span id="factoryVal" class="text-lg">60%</span>
+                        <span data-i18n="max_val">مرتفع</span>
+                    </div>
+                </div>
+                <!-- Slider 3 -->
+                <div class="bg-white/30 p-6 rounded-3xl border border-white/50">
+                    <label class="block text-sm font-bold mb-4 text-textDark" data-i18n="slider3_label">دعم البحث العلمي والابتكار البيئي</label>
+                    <input type="range" id="startupSlider" min="10" max="100" value="85" class="w-full appearance-none cursor-pointer mb-4" oninput="updateSimulation()">
+                    <div class="flex justify-between text-xs text-textDark font-black">
+                        <span data-i18n="min_val">منخفض</span>
+                        <span id="startupVal" class="text-lg">85%</span>
+                        <span data-i18n="max_val">مرتفع</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Output Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-6 rounded-3xl bg-textDark text-sandMain shadow-xl">
+                    <div class="text-sm font-medium text-sandMain/80 mb-2" data-i18n="metric1_title">خفض الانبعاثات الكربونية</div>
+                    <div id="m1" class="text-4xl font-black">66%</div>
+                </div>
+                <div class="p-6 rounded-3xl bg-textDark text-sandMain shadow-xl">
+                    <div class="text-sm font-medium text-sandMain/80 mb-2" data-i18n="metric2_title">مؤشر صمود البنية التحتية</div>
+                    <div id="m2" class="text-4xl font-black">82%</div>
+                </div>
+                <div class="p-6 rounded-3xl bg-textDark text-sandMain shadow-xl">
+                    <div class="text-sm font-medium text-sandMain/80 mb-2" data-i18n="metric3_title">فرص الابتكار المستحدثة</div>
+                    <div id="m3" class="text-4xl font-black">16.1 ألف</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Solutions Grid -->
+    <section class="relative z-10 container mx-auto px-6 py-20 max-w-6xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black text-textDark mb-4" data-i18n="solutions_heading">استراتيجيات وحلول مناخية</h2>
+            <p class="text-textDark/80 font-medium max-w-2xl mx-auto text-lg" data-i18n="solutions_sub">اضغط على أي استراتيجية لمعرفة تفاصيل دمجها مع أهداف الاستدامة وتغير المناخ.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div onclick="openSolutionModal(1)" class="sand-card p-8 rounded-[2rem] cursor-pointer group">
+                <div class="w-16 h-16 rounded-2xl bg-textDark text-sandMain flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-textDark" data-i18n="sol1_title">التكيف مع التغير المناخي</h3>
+                <p class="text-textDark/80 text-sm leading-relaxed mb-6 font-medium" data-i18n="sol1_desc">بناء شبكات حضرية ذكية ومصدات طبيعية قادرة على تحمل الارتفاع في منسوب البحار والظواهر المتطرفة.</p>
+                <div class="flex items-center text-textDark font-bold text-sm gap-2 pt-6 border-t border-textDark/10">
+                    <span data-i18n="explore_btn">قراءة المزيد</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-2 transition-transform rtl:rotate-180"></i>
+                </div>
+            </div>
+
+            <div onclick="openSolutionModal(2)" class="sand-card p-8 rounded-[2rem] cursor-pointer group">
+                <div class="w-16 h-16 rounded-2xl bg-textDark text-sandMain flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-textDark" data-i18n="sol2_title">الاقتصاد الدائري والصناعة</h3>
+                <p class="text-textDark/80 text-sm leading-relaxed mb-6 font-medium" data-i18n="sol2_desc">تقليل البصمة الكربونية للمصانع عبر طاقة نظيفة وإعادة تدوير كاملة للموارد والمخلفات الصناعية.</p>
+                <div class="flex items-center text-textDark font-bold text-sm gap-2 pt-6 border-t border-textDark/10">
+                    <span data-i18n="explore_btn">قراءة المزيد</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-2 transition-transform rtl:rotate-180"></i>
+                </div>
+            </div>
+
+            <div onclick="openSolutionModal(3)" class="sand-card p-8 rounded-[2rem] cursor-pointer group">
+                <div class="w-16 h-16 rounded-2xl bg-textDark text-sandMain flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-textDark" data-i18n="sol3_title">الابتكار البيئي (Eco-Innovation)</h3>
+                <p class="text-textDark/80 text-sm leading-relaxed mb-6 font-medium" data-i18n="sol3_desc">توجيه التمويل التكنولوجي نحو حلول الطاقة المتجددة، والزراعة الذكية مناخياً، والمدن الخضراء.</p>
+                <div class="flex items-center text-textDark font-bold text-sm gap-2 pt-6 border-t border-textDark/10">
+                    <span data-i18n="explore_btn">قراءة المزيد</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-2 transition-transform rtl:rotate-180"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom AIU Footer (Exactly matching Image 1) -->
+    <footer class="bg-aiuBg text-white py-14 border-t border-[#2A352B] mt-10">
+        <div class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-10 md:gap-16">
+            
+            <!-- AIU Logo Block -->
+            <div class="flex flex-col items-center md:items-start rtl:text-right ltr:text-left">
+                <div class="flex items-baseline leading-none mb-1">
+                    <span class="text-aiuRed text-5xl md:text-6xl font-black tracking-tighter" style="font-family: 'Inter', sans-serif;">AIU</span>
+                    <span class="text-aiuRed text-5xl md:text-6xl font-black" style="font-family: 'Inter', sans-serif;">.</span>
+                </div>
+                <span class="text-aiuBlue text-lg md:text-xl font-black tracking-[0.2em] -mt-1" style="font-family: 'Inter', sans-serif;">ALAMEIN</span>
+                <span class="text-aiuBlue text-[0.55rem] md:text-[0.65rem] font-bold tracking-[0.15em] leading-none mb-2" style="font-family: 'Inter', sans-serif;">INTERNATIONAL UNIVERSITY</span>
+                <span class="text-aiuRed text-sm md:text-base font-bold font-arabic" data-i18n="aiu_arabic">جامعة العلمين الدولية</span>
+            </div>
+
+            <!-- Course Title Block -->
+            <div class="text-center md:text-left rtl:md:text-right flex flex-col justify-center border-t md:border-none border-[#2A352B] pt-8 md:pt-2">
+                <h2 class="text-3xl md:text-4xl font-normal mb-4 tracking-wide text-[#F9FAFB] leading-snug" style="font-family: 'Inter', sans-serif;">
+                    Alamein International<br>University
+                </h2>
+                <p class="text-[#849086] text-sm md:text-base font-light tracking-wide" style="font-family: 'Inter', sans-serif;">
+                    GEO217 · Climate Change and Sustainability
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Modal for Detailed Solution View -->
+    <div id="solution-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="sand-card max-w-2xl w-full p-8 md:p-10 rounded-[2rem] relative">
+            <button onclick="closeSolutionModal()" class="absolute top-6 left-6 text-textDark/60 hover:text-textDark text-2xl transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="modal-title" class="text-2xl md:text-3xl font-black text-textDark mb-4"></h3>
+            <p id="modal-desc" class="text-textDark/80 text-base md:text-lg mb-8 leading-relaxed font-medium"></p>
+            
+            <div class="bg-white/40 p-6 rounded-2xl border border-white/50 mb-8">
+                <h4 class="text-textDark font-black mb-3" data-i18n="modal_metrics_title">الأهداف المستدامة والمؤشرات:</h4>
+                <p id="modal-metrics" class="text-textDark/80 text-sm md:text-base leading-relaxed font-bold"></p>
+            </div>
+
+            <button onclick="closeSolutionModal()" class="w-full py-4 rounded-2xl bg-textDark text-sandMain font-black text-base hover:opacity-90 transition-opacity shadow-lg" data-i18n="modal_close">
+                إغلاق النافذة
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                page_title: "هندسة الغد المستدام | AIU - GEO217",
+                nav_title: "التنمية المستدامة",
+                badge_text: "الهدف التاسع للتنمية المستدامة (SDG 9)",
+                hero_title: "بناء بنية تحتية مرنة<br>لغدٍ مستدام",
+                hero_desc: "رؤية هندسية بيئية لمعالجة التحديات المناخية من خلال الابتكار، التصنيع الأخضر، وتطوير البنية التحتية لمواكبة التغيرات العالمية.",
+                sim_title: "محاكي الاستدامة التفاعلي",
+                sim_sub: "قم بتعديل المؤشرات لترى التأثير المباشر للحلول الهندسية المستدامة:",
+                slider1_label: "الاستثمار في البنية التحتية المرنة",
+                slider2_label: "التحول للصناعات النظيفة والمستدامة",
+                slider3_label: "دعم البحث العلمي والابتكار البيئي",
+                min_val: "منخفض",
+                max_val: "مرتفع",
+                metric1_title: "خفض الانبعاثات الكربونية",
+                metric2_title: "مؤشر صمود البنية التحتية",
+                metric3_title: "فرص الابتكار المستحدثة",
+                solutions_heading: "استراتيجيات وحلول مناخية",
+                solutions_sub: "اضغط على أي استراتيجية لمعرفة تفاصيل دمجها مع أهداف الاستدامة وتغير المناخ.",
+                sol1_title: "التكيف مع التغير المناخي",
+                sol1_desc: "بناء شبكات حضرية ذكية ومصدات طبيعية قادرة على تحمل الارتفاع في منسوب البحار والظواهر المتطرفة.",
+                sol2_title: "الاقتصاد الدائري والصناعة",
+                sol2_desc: "تقليل البصمة الكربونية للمصانع عبر طاقة نظيفة وإعادة تدوير كاملة للموارد والمخلفات الصناعية.",
+                sol3_title: "الابتكار البيئي (Eco-Innovation)",
+                sol3_desc: "توجيه التمويل التكنولوجي نحو حلول الطاقة المتجددة، والزراعة الذكية مناخياً، والمدن الخضراء.",
+                explore_btn: "قراءة المزيد",
+                aiu_arabic: "جامعة العلمين الدولية",
+                modal_metrics_title: "الأهداف المستدامة والمؤشرات:",
+                modal_close: "إغلاق النافذة"
+            },
+            en: {
+                page_title: "Sustainable Tomorrow | AIU - GEO217",
+                nav_title: "Sustainability",
+                badge_text: "Sustainable Development Goal 9 (SDG 9)",
+                hero_title: "Building Resilient Infrastructure<br>For a Sustainable Tomorrow",
+                hero_desc: "An eco-engineering vision to tackle climate challenges through innovation, green manufacturing, and resilient infrastructure.",
+                sim_title: "Interactive Sustainability Simulator",
+                sim_sub: "Adjust the indicators to see the direct impact of sustainable engineering solutions:",
+                slider1_label: "Resilient Infrastructure Investment",
+                slider2_label: "Transition to Clean & Sustainable Industries",
+                slider3_label: "Scientific Research & Eco-Innovation Support",
+                min_val: "Low",
+                max_val: "High",
+                metric1_title: "Carbon Emissions Reduction",
+                metric2_title: "Infrastructure Resilience Index",
+                metric3_title: "New Innovation Opportunities",
+                solutions_heading: "Climate Strategies & Solutions",
+                solutions_sub: "Click any strategy to learn about its integration with sustainability and climate change goals.",
+                sol1_title: "Climate Change Adaptation",
+                sol1_desc: "Building smart urban networks and natural barriers capable of withstanding sea-level rise and extreme events.",
+                sol2_title: "Circular Economy & Industry",
+                sol2_desc: "Reducing the carbon footprint of factories via clean energy and full recycling of industrial resources and waste.",
+                sol3_title: "Eco-Innovation",
+                sol3_desc: "Directing tech funding towards renewable energy solutions, climate-smart agriculture, and green cities.",
+                explore_btn: "Read More",
+                aiu_arabic: "Alamein International University",
+                modal_metrics_title: "Sustainable Targets & Indicators:",
+                modal_close: "Close Window"
+            }
+        };
+
+        const modalData = {
+            ar: {
+                1: {
+                    title: "التكيف مع التغير المناخي",
+                    desc: "استراتيجية تركز على تحديث البنية التحتية القائمة لتصبح 'مقاومة للمناخ' (Climate-Proof). يشمل ذلك استخدام مواد بناء تمتص الحرارة، وأنظمة تصريف ذكية للتعامل مع الفيضانات المفاجئة.",
+                    metrics: "• تقليل خسائر البنية التحتية الناتجة عن الكوارث بنسبة 60%.\n• ربط المناطق الساحلية المعرضة للخطر بشبكات إنذار مبكر وإنقاذ رقمية."
+                },
+                2: {
+                    title: "الاقتصاد الدائري والصناعة",
+                    desc: "ربط الهدف التاسع بمقرر GEO217 يتمثل في تقليل الانبعاثات الصناعية التي تسبب الاحتباس الحراري. يتم تحويل المصانع لتعمل بالطاقة المتجددة وتطبيق نظام (صفر نفايات).",
+                    metrics: "• خفض الغازات الدفيئة (GHG) من القطاع الصناعي بنسبة 50%.\n• إعادة تدوير 90% من المخلفات الصلبة والمياه المستخدمة صناعياً."
+                },
+                3: {
+                    title: "الابتكار البيئي (Eco-Innovation)",
+                    desc: "تشجيع الجامعات والمراكز البحثية على تطوير تكنولوجيا خضراء. يتضمن ذلك توفير منصات تمويل للمشاريع الناشئة التي تقدم حلولاً برمجية وهندسية لقياس وتخفيف آثار التغير المناخي.",
+                    metrics: "• تمويل أكثر من 5,000 مشروع بحثي وشركة ناشئة في مجال المناخ.\n• خلق جيل جديد من المهندسين الواعين بيئياً لقيادة التحول الأخضر."
+                }
+            },
+            en: {
+                1: {
+                    title: "Climate Change Adaptation",
+                    desc: "A strategy focused on upgrading existing infrastructure to become 'Climate-Proof'. This includes using heat-absorbing building materials and smart drainage systems for flash floods.",
+                    metrics: "• Reducing infrastructure losses from disasters by 60%.\n• Connecting vulnerable coastal areas with digital early warning networks."
+                },
+                2: {
+                    title: "Circular Economy & Industry",
+                    desc: "Linking SDG 9 to GEO217 involves reducing industrial emissions causing global warming. Factories are converted to run on renewable energy applying a zero-waste system.",
+                    metrics: "• Cutting Greenhouse Gases (GHG) from the industrial sector by 50%.\n• Recycling 90% of solid waste and industrially used water."
+                },
+                3: {
+                    title: "Eco-Innovation",
+                    desc: "Encouraging universities and research centers to develop green tech. This includes funding platforms for startups providing software and engineering solutions to mitigate climate impacts.",
+                    metrics: "• Funding over 5,000 research projects and climate startups.\n• Creating a new generation of eco-conscious engineers to lead the green transition."
+                }
+            }
+        };
+
+        function updateSimulation() {
+            const infra = parseInt(document.getElementById('infraSlider').value);
+            const factory = parseInt(document.getElementById('factorySlider').value);
+            const startup = parseInt(document.getElementById('startupSlider').value);
+
+            document.getElementById('infraVal').innerText = infra + '%';
+            document.getElementById('factoryVal').innerText = factory + '%';
+            document.getElementById('startupVal').innerText = startup + '%';
+
+            // Calculate dynamic metrics
+            const carbonRed = Math.round((factory * 0.7) + (infra * 0.15));
+            const resilience = Math.round((infra * 0.75) + (startup * 0.2));
+            const jobs = ((startup * 130 + infra * 50) / 1000).toFixed(1) + (currentLang === 'ar' ? ' ألف' : 'k');
+
+            document.getElementById('m1').innerText = carbonRed + '%';
+            document.getElementById('m2').innerText = resilience + '%';
+            document.getElementById('m3').innerText = jobs;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const root = document.getElementById('html-root');
+            const langText = document.getElementById('lang-text');
+            
+            if (currentLang === 'en') {
+                root.setAttribute('dir', 'ltr');
+                root.setAttribute('lang', 'en');
+                langText.innerText = 'العربية';
+            } else {
+                root.setAttribute('dir', 'rtl');
+                root.setAttribute('lang', 'ar');
+                langText.innerText = 'English';
+            }
+
+            // Update text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                   el.innerHTML = translations[currentLang][key];
+                }
+            });
+            updateSimulation();
+        }
+
+        function openSolutionModal(id) {
+            const modal = document.getElementById('solution-modal');
+            const titleEl = document.getElementById('modal-title');
+            const descEl = document.getElementById('modal-desc');
+            const metricsEl = document.getElementById('modal-metrics');
+
+            titleEl.innerText = modalData[currentLang][id].title;
+            descEl.innerText = modalData[currentLang][id].desc;
+            metricsEl.innerHTML = modalData[currentLang][id].metrics.replace(/\n/g, '<br><br>');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeSolutionModal() {
+            const modal = document.getElementById('solution-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        updateSimulation();
+    </script>
+</body>
+</html>
